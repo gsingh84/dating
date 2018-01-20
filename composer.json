@@ -1,0 +1,12 @@
+{
+  "name":"gsinghgr/dating",
+  "authors":[
+    {
+      "name": "Gursimran Singh",
+      "email": "gsingh84@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
