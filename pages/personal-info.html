@@ -27,36 +27,50 @@
                 <div class="col-md-7">
                     <div class="form-group row">
                     <div class="col-12">
+                        <check if="{{isset(@errors['firstname'])}}">
+                            <p class="text-warning">{{ @errors['firstname'] }}</p>
+                        </check>
                         <label>First Name</label>
-                        <input type="text" class="form-control" name="firstname">
+                        <input type="text" class="form-control" value="{{@firstname}}" name="firstname">
                     </div>
                     </div>
 
                     <div class="form-group row">
                     <div class="col-12">
+                        <check if="{{isset(@errors['lastname'])}}">
+                            <p class="text-warning">{{ @errors['lastname'] }}</p>
+                        </check>
                         <label>Last Name</label>
-                        <input type="text" class="form-control" name="lastname">
+                        <input type="text" class="form-control" value="{{@lastname}}" name="lastname">
                     </div>
                     </div>
 
                     <div class="form-group row">
                     <div class="col-12">
+                        <check if="{{isset(@errors['age'])}}">
+                            <p class="text-warning">{{ @errors['age'] }}</p>
+                        </check>
                         <label>Age</label>
-                        <input type="text" class="form-control" name="age">
+                        <input type="text" class="form-control" value="{{@age}}" name="age">
                     </div>
                     </div>
 
                     <div class="form-group row">
                     <div class="col-12">
+                        <check if="{{isset(@errors['gender'])}}">
+                            <p class="text-warning">{{ @errors['gender'] }}</p>
+                        </check>
                         <label>Gender</label> <br>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="gender" value="Male"> Male
+                                <input class="form-check-input" type="radio" name="gender" value="Male"
+                                <check if="{{@gender == 'Male'}}">checked="checked"</check>> Male
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="gender" value="Female"> Female
+                                <input class="form-check-input" type="radio" name="gender" value="Female"
+                                <check if="{{@gender == 'Female'}}">checked="checked"</check>> Female
                             </label>
                         </div>
                     </div>
@@ -64,8 +78,11 @@
 
                     <div class="form-group row">
                     <div class="col-12">
+                        <check if="{{isset(@errors['phone'])}}">
+                            <p class="text-warning">{{ @errors['phone'] }}</p>
+                        </check>
                         <label>Phone Number</label>
-                        <input type="text" class="form-control" name="phone">
+                        <input type="text" class="form-control" value="{{@phone}}" name="phone">
                     </div>
                     </div>
                 </div>
@@ -82,7 +99,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" name="next" class="btn btn-primary float-right">Next ></button>
+                    <button type="submit" name="submit" class="btn btn-primary float-right">Next ></button>
                 </div>
             </div>
         </form>

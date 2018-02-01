@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //validate name
 function validName($name)
@@ -34,10 +35,10 @@ function validIndoor($indoor)
 
 $errors = array();
 
-if(!validName($firstname)) {
+if(!validName($firstName)) {
     $errors['firstname'] = "Please enter a valid first name";
 }
-if(!validName($lastname)) {
+if(!validName($lastName)) {
     $errors['lastname'] = "Please enter a valid last name";
 }
 if(!validAge($age)) {
@@ -51,5 +52,7 @@ if(!validPhone($phone))
 {
     $errors['phone'] = "Please enter a valid phone number";
 }
+
+$success = sizeof($errors) == 0;
 
 
