@@ -102,9 +102,35 @@ $f3->route('GET|POST /profile', function($f3){
 });
 
 $f3->route('GET|POST /interests', function($f3){
+
+    if(isset($_POST['submit']))
+    {
+        //get user input values
+        $indoor = $_POST['indoors'];
+        $outdoor = $_POST['outdoors'];
+
+        //set values in fat free
+        $f3->set('indoor', $indoor);
+        $f3->set('outdoor', $outdoor);
+
+        //set error message
+        if(!isset($indoor) && !isset($outdoor)) {
+            $f3->set('error', 'Please select at least one interest');
+        } else { //store in session if success
+            $_SESSION['indoors'] = $indoor;
+            $_SESSION['outdoors'] = $outdoor;
+            header("Location: http://gsingh.greenriverdev.com/328/dating/summary");
+        }
+
+    }
+
     //display personal info page
     $template = new Template();
     echo $template->render('pages/interests.html');
+});
+
+$f3->route('GET|POST /summary', function($f3){
+    echo "summary";
 });
 
 //Run fat free

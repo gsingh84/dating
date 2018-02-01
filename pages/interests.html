@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ @title }}</title>
+    <title>Summary</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     <link rel="stylesheet" href="http://gsingh.greenriverdev.com/328/dating/styles/pages-style.css">
@@ -25,13 +25,19 @@
 
             <div class="row">
                 <div class="col-12">
+                    <check if="{{isset(@error)}}">
+                        <p class="text-warning">{{@error}}</p>
+                    </check>
                     <p class="h6">In-door Interests</p>
                 </div>
             </div>
             <div class="form-group row">
-                <repeat group="{{@indoors}}" value="{{@indoor}}">
+                <repeat group="{{@indoors}}" value="{{@indoorOpt}}">
                     <div class="col-md-3">
-                        <input type="checkbox" name="indoors[]" value="{{ @indoor }}"> {{@indoor}}
+                        <input type="checkbox" name="indoors[]" value="{{ @indoorOpt }}"
+                        <repeat group="{{@indoor}}" value="@selected">
+                            <check if="@indoorOpt == @selected">checked</check>
+                        </repeat>> {{@indoorOpt}}
                     </div>
                 </repeat>
             </div> <!--indoor interests-->
@@ -42,9 +48,12 @@
                 </div>
             </div>
             <div class="form-group row">
-                <repeat group="{{@outdoors}}" value="{{@outdoor}}">
+                <repeat group="{{@outdoors}}" value="{{@outdoorOpt}}">
                     <div class="col-md-3">
-                        <input type="checkbox" name="outdoors[]" value="{{ @outdoor }}"> {{@outdoor}}
+                        <input type="checkbox" name="outdoors[]" value="{{ @outdoorOpt }}"
+                        <repeat group="{{@outdoor}}" value="@selected">
+                            <check if="@outdoorOpt == @selected">checked</check>
+                        </repeat>> {{@outdoorOpt}}
                     </div>
                 </repeat>
             </div><!--outdoor interests-->
