@@ -101,5 +101,11 @@ $f3->route('GET|POST /profile', function($f3){
     echo $template->render('pages/profile.html');
 });
 
+$f3->route('GET|POST /interests', function($f3){
+    //display personal info page
+    $template = new Template();
+    echo $template->render('pages/interests.html');
+});
+
 //Run fat free
 $f3->run();

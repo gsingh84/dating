@@ -30,7 +30,7 @@
                         <check if="{{isset(@errors['firstname'])}}">
                             <p class="text-warning">{{ @errors['firstname'] }}</p>
                         </check>
-                        <label>First Name</label>
+                        <label class="h6">First Name</label>
                         <input type="text" class="form-control" value="{{@firstname}}" name="firstname">
                     </div>
                     </div>
@@ -40,7 +40,7 @@
                         <check if="{{isset(@errors['lastname'])}}">
                             <p class="text-warning">{{ @errors['lastname'] }}</p>
                         </check>
-                        <label>Last Name</label>
+                        <label class="h6">Last Name</label>
                         <input type="text" class="form-control" value="{{@lastname}}" name="lastname">
                     </div>
                     </div>
@@ -50,7 +50,7 @@
                         <check if="{{isset(@errors['age'])}}">
                             <p class="text-warning">{{ @errors['age'] }}</p>
                         </check>
-                        <label>Age</label>
+                        <label class="h6">Age</label>
                         <input type="text" class="form-control" value="{{@age}}" name="age">
                     </div>
                     </div>
@@ -60,7 +60,7 @@
                         <check if="{{isset(@errors['gender'])}}">
                             <p class="text-warning">{{ @errors['gender'] }}</p>
                         </check>
-                        <label>Gender</label> <br>
+                        <label class="h6">Gender</label> <br>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="gender" value="Male"
@@ -81,7 +81,7 @@
                         <check if="{{isset(@errors['phone'])}}">
                             <p class="text-warning">{{ @errors['phone'] }}</p>
                         </check>
-                        <label>Phone Number</label>
+                        <label class="h6">Phone Number</label>
                         <input type="text" class="form-control" value="{{@phone}}" name="phone">
                     </div>
                     </div>
