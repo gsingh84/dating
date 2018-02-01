@@ -49,7 +49,6 @@ $f3->route('GET|POST /info', function($f3){
         $f3->set('gender', $gender);
         $f3->set('phone', $phone);
         $f3->set('errors', $errors);
-        $f3->set('success', $success);
 
         //set values in session if success
         if($success) {
@@ -72,13 +71,31 @@ $f3->route('GET|POST /info', function($f3){
 
 $f3->route('GET|POST /profile', function($f3){
 
-    //get user input
-    $email = $_POST['email'];
-    $state = $_POST['state'];
+    if(isset($_POST['submit']))
+    {
+        //get user input
+        $email = $_POST['email'];
+        $state = $_POST['state'];
+        $seeking = $_POST['seeking'];
 
-    //set values in fat free
-    $f3->set('email', $email);
-    $f3->set('state', $state);
+        //include file
+        include('model/validate-profile.php');
+        //set values in fat free
+        $f3->set('email', $email);
+        $f3->set('state', $state);
+        $f3->set('seeking', $seeking);
+        $f3->set('errors', $errors);
+
+        if($success)
+        {
+            $_SESSION['email'] = $email;
+            $_SESSION['state'] = $state;
+            $_SESSION['seeking'] = $seeking;
+
+            header("Location: http://gsingh.greenriverdev.com/328/dating/interests");
+        }
+    }
+
     //display personal info page
     $template = new Template();
     echo $template->render('pages/profile.html');

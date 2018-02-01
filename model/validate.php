@@ -33,8 +33,10 @@ function validIndoor($indoor)
     return in_array($indoor, $f3->get('indoor'));
 }
 
+//array for collecting errors
 $errors = array();
 
+//check errors on personal info page
 if(!validName($firstName)) {
     $errors['firstname'] = "Please enter a valid first name";
 }
