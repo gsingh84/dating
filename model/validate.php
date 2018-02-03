@@ -1,4 +1,7 @@
 <?php
+//Gursimran Singh
+//01/19/18
+//validate.php
 session_start();
 
 //validate name

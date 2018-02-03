@@ -8,6 +8,39 @@ header{
 .box{
     border: 1px solid lightgray;
     margin: 50px;
-    margin-top: 20px;
+    margin-top: 5px;
     padding: 30px;
+}
+
+.lines{
+    font-size: 18px;
+    height: 40px;
+    border: 0.5px solid lightgray;
+    padding: 5px;
+    padding-left: 10px;
+    border-collapse: collapse;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 18px;
+    color: gray;
+    border-radius: 25px;
+}
+
+td{
+    padding: 5px;
+    padding-left: 15px;
+}
+
+table, td {
+    border: 0.5px solid lightgray;
+}
+
+#profile-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

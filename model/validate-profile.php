@@ -1,4 +1,7 @@
 <?php
+//Gursimran Singh
+//01/19/18
+//validate-profile.php
 
 //validate email
 function validEmail($email)
@@ -16,6 +19,7 @@ function validState($state)
 //array for collecting errors
 $errors = array();
 
+//check errors on profile page
 if(!validEmail($email)) {
     $errors['email'] = "Please enter a valid email";
 }
@@ -25,6 +29,11 @@ if(!validState($state)) {
 if(!isset($seeking))
 {
     $errors['seeking'] = "Please select a gender you are interested in";
+}
+if(empty($bio))
+{
+    $errors['bio'] = "Please say something about yourself";
+
 }
 
 //get array size

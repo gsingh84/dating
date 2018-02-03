@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+
+<!--Gursimran Singh-->
+<!--01/19/18-->
+<!--profile.html-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,8 +19,29 @@
         </div>
     </header> <!--header-->
 
+    <nav class="navbar navbar-toggleable-md navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./info">Personal Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./interests">Interests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./summary">Summary</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> <!--nav bar -->
+
     <div class="container-fluid rounded box">
-        <form action="" method="post">
+        <form action="#" method="post">
             <div class="row">
                 <div class="col-12">
                     <p class="h2">Profile</p>
@@ -31,7 +57,7 @@
                                 <p class="text-warning">{{ @errors['email'] }}</p>
                             </check>
                             <label class="h6">Email</label>
-                            <input type="text" class="form-control" value="{{@email}}" name="email">
+                            <input type="text" class="form-control" value="{{@$_SESSION['email']}}" name="email">
                         </div>
                     </div>
 
@@ -44,7 +70,7 @@
                             <select class="form-control" name="state">
                                 <option>--Select--</option>
                                 <repeat group="{{ @states }}" value="{{ @stateOption }}">
-                                    <option <check if="{{@stateOption == @state }}">selected</check>>
+                                    <option <check if="{{@stateOption == @$_SESSION['state'] }}">selected</check>>
                                     {{ @stateOption}}
                                     </option>
                                 </repeat>
@@ -61,13 +87,13 @@
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="radio" name="seeking" value="Male"
-                                    <check if="{{@seeking == 'Male'}}">checked="checked"</check>> Male
+                                    <check if="{{@$_SESSION['seeking'] == 'Male'}}">checked="checked"</check>> Male
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="radio" name="seeking" value="Female"
-                                    <check if="{{@seeking == 'Female'}}">checked="checked"</check>> Female
+                                    <check if="{{@$_SESSION['seeking'] == 'Female'}}">checked="checked"</check>> Female
                                 </label>
                             </div>
                         </div>
@@ -77,8 +103,11 @@
                 <div class="col-md-6">
                     <div class="form-group row">
                         <div class="col-12">
+                            <check if="{{isset(@errors['bio'])}}">
+                                <p class="text-warning">{{ @errors['bio'] }}</p>
+                            </check>
                             <label class="h6">Biography</label>
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea class="form-control" name="bio" rows="5">{{@$_SESSION['bio']}}</textarea>
                         </div>
                     </div>
                 </div>

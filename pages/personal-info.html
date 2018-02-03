@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+
+<!--Gursimran Singh-->
+<!--01/19/18-->
+<!--personal-info.html-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,8 +19,29 @@
         </div>
     </header> <!--header-->
 
+    <nav class="navbar navbar-toggleable-md navbar-light bg-light">
+        <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="./info">Personal Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./interests">Interests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./summary">Summary</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav> <!--nav bar -->
+
     <div class="container-fluid rounded box">
-        <form action="" method="post">
+        <form action="#" method="post">
             <div class="row">
                 <div class="col-12">
                     <p class="h2">Personal Information</p>
@@ -31,7 +57,7 @@
                             <p class="text-warning">{{ @errors['firstname'] }}</p>
                         </check>
                         <label class="h6">First Name</label>
-                        <input type="text" class="form-control" value="{{@firstname}}" name="firstname">
+                        <input type="text" class="form-control" value="{{@$_SESSION['fname']}}" name="firstname">
                     </div>
                     </div>
 
@@ -41,7 +67,7 @@
                             <p class="text-warning">{{ @errors['lastname'] }}</p>
                         </check>
                         <label class="h6">Last Name</label>
-                        <input type="text" class="form-control" value="{{@lastname}}" name="lastname">
+                        <input type="text" class="form-control" value="{{@$_SESSION['lname']}}" name="lastname">
                     </div>
                     </div>
 
@@ -51,7 +77,7 @@
                             <p class="text-warning">{{ @errors['age'] }}</p>
                         </check>
                         <label class="h6">Age</label>
-                        <input type="text" class="form-control" value="{{@age}}" name="age">
+                        <input type="text" class="form-control" value="{{@$_SESSION['age']}}" name="age">
                     </div>
                     </div>
 
@@ -64,13 +90,13 @@
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="gender" value="Male"
-                                <check if="{{@gender == 'Male'}}">checked="checked"</check>> Male
+                                <check if="{{@$_SESSION['gender'] == 'Male'}}">checked="checked"</check>> Male
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="gender" value="Female"
-                                <check if="{{@gender == 'Female'}}">checked="checked"</check>> Female
+                                <check if="{{@$_SESSION['gender'] == 'Female'}}">checked="checked"</check>> Female
                             </label>
                         </div>
                     </div>
@@ -82,7 +108,7 @@
                             <p class="text-warning">{{ @errors['phone'] }}</p>
                         </check>
                         <label class="h6">Phone Number</label>
-                        <input type="text" class="form-control" value="{{@phone}}" name="phone">
+                        <input type="text" class="form-control" value="{{@$_SESSION['phone']}}" name="phone">
                     </div>
                     </div>
                 </div>

@@ -1,10 +1,96 @@
 <!DOCTYPE html>
+
+<!--Gursimran Singh-->
+<!--01/19/18-->
+<!--summary.html-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Summary</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./styles/pages-style.css">
 </head>
 <body>
+    <header class="clearfix" style="height: 5vh; padding: 5px; padding-left: 10px; background-color:#f2f2f2;  background-size: cover;">
+        <div class="container-fluid">
+            <a style="text-decoration: none; color: gray;" href="http://gsingh.greenriverdev.com/328/dating/"><p class="h5">My Dating Website</p></a>
+        </div>
+    </header> <!--header-->
 
+    <nav class="navbar navbar-toggleable-md navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./info">Personal Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./interests">Interests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./summary">Summary</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> <!--nav bar -->
+
+    <div class="container-fluid rounded box">
+        <div class="form-group row">
+            <div class="col-md-6">
+                <table>
+                    <tr>
+                        <td>Name: {{@$_SESSION['fname']}} {{@$_SESSION['lname']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender: {{@$_SESSION['gender']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Age: {{@$_SESSION['age']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone: {{@$_SESSION['phone']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email: {{@$_SESSION['email']}}</td>
+                    </tr>
+                    <tr>
+                        <td>State: {{@$_SESSION['state']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Seeking: {{@$_SESSION['seeking']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Interests:
+                            <repeat group="@$_SESSION['interests']" value="@interest">
+                                {{@interest}}
+                            </repeat>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <img id="profile-img" src="http://suggestto.com/images/profile_pic/default.png" alt="img">
+                <div class="row">
+                    <div class="col">
+                        <p>{{@$_SESSION['bio']}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button class="btn-lg btn-primary rounded">Contact Me!</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
