@@ -39,7 +39,7 @@ $f3->route('GET|POST /info', function($f3){
         $age = $_POST['age'];
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
-
+        $premium = $_POST['premium'];
         //include file
         include('model/validate.php');
 
@@ -49,12 +49,26 @@ $f3->route('GET|POST /info', function($f3){
         $_SESSION['age'] = $age;
         $_SESSION['gender'] = $gender;
         $_SESSION['phone'] = $phone;
+        $_SESSION['premium'] = $premium;
+
+        //instantiate premium object if the premium member
+        //checkbox is selected
+        if(isset($premium)) {
+            $profile = new Premium($firstName, $lastName, $age, $gender, $phone);
+        } else {
+            //instantiate member object
+            $profile = new Member($firstName, $lastName, $age, $gender, $phone);
+        }
 
         //set fat free errors array
         $f3->set('errors', $errors);
+        if(sizeof($errors) != 0) {
+            unset($_SESSION['page1']);
+        }
 
         if($success) {
             $_SESSION['page1'] = 'success';
+            $_SESSION['profile'] = $profile;
             //redirect to next page
             header("Location: http://gsingh.greenriverdev.com/328/dating/profile");
         }
@@ -65,7 +79,7 @@ $f3->route('GET|POST /info', function($f3){
     echo $template->render('pages/personal-info.html');
 });
 
-$f3->route('GET|POST /profile', function($f3){
+$f3->route('GET|POST /profile', function($f3) {
     if(isset($_POST['submit']))
     {
         //get user input
@@ -82,12 +96,21 @@ $f3->route('GET|POST /profile', function($f3){
         $_SESSION['seeking'] = $seeking;
         $_SESSION['bio'] = $bio;
 
+        //get profile object from session
+        $profile = $_SESSION['profile'];
+        //add additional info into profile object
+        $profile->setEmail($email);
+        $profile->setState($state);
+        $profile->setSeeking($seeking);
+        $profile->setBio($bio);
+
         //set fat free errors array
         $f3->set('errors', $errors);
 
         //move to next page if success
         if($success)
         {
+            $_SESSION['profile'] = $profile;
             $_SESSION['page2'] = 'success';
             header("Location: http://gsingh.greenriverdev.com/328/dating/interests");
         }
@@ -99,7 +122,9 @@ $f3->route('GET|POST /profile', function($f3){
 });
 
 $f3->route('GET|POST /interests', function($f3){
-
+    if(get_class($_SESSION['profile']) == "Member") {
+        header("Location: http://gsingh.greenriverdev.com/328/dating/summary");
+    }
     if(isset($_POST['submit']))
     {
         //get user input values
@@ -134,7 +159,7 @@ $f3->route('GET|POST /interests', function($f3){
 
 $f3->route('GET|POST /summary', function(){
     //check all the pages are completed before proceeding to the summary page
-    if(!isset($_SESSION['page1']) || !isset($_SESSION['page2']) || !isset($_SESSION['page3']))
+    if(!isset($_SESSION['page1']) || !isset($_SESSION['page2']))
     {
         header("Location: http://gsingh.greenriverdev.com/328/dating/interests?success=no");
     }
