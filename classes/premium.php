@@ -2,8 +2,8 @@
 
 class Premium extends Member
 {
-    private $_indoorInterests = array();
-    private $_outdoorInterests = array();
+    private $_indoorInterests;
+    private $_outdoorInterests;
 
     public function __construct($fname, $lname, $age, $gender, $phone)
     {
@@ -11,9 +11,14 @@ class Premium extends Member
         parent::__construct($fname, $lname, $age, $gender, $phone);
     }
 
+//    public function setEmail($email)
+//    {
+//        parent::setEmail($email);
+//    }
+
     public function setIndoor($indoor)
     {
-        array_push($this->_indoorInterests, $indoor);
+        $this->_indoorInterests = $indoor;
     }
 
     public function getIndoor()
@@ -23,7 +28,7 @@ class Premium extends Member
 
     public function setOutdoor($outdoor)
     {
-        array_push($this->_outdoorInterests, $outdoor);
+        $this->_outdoorInterests = $outdoor;
     }
 
     public function getOutdoor()

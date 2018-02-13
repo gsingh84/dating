@@ -15,7 +15,7 @@
 <body>
     <header class="clearfix" style="height: 5vh; padding: 5px; padding-left: 10px; background-color:#f2f2f2;  background-size: cover;">
         <div class="container-fluid">
-            <p class="h5">My Dating Website</p>
+            <a style="text-decoration: none; color: gray;" href="http://gsingh.greenriverdev.com/328/dating/"><p class="h5">My Dating Website</p></a>
         </div>
     </header> <!--header-->
 
@@ -44,6 +44,9 @@
         <form action="#" method="post">
             <div class="row">
                 <div class="col-12">
+                    <check if="{{isset($_GET['profile'])}}">
+                        <p class="text-danger text-center">Please fill the required fields before proceeding to next page</p>
+                    </check>
                     <p class="h2">Personal Information</p>
                 </div>
             </div>

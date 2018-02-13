@@ -56,65 +56,41 @@ class Member
         return $this->age;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @return mixed
-     */
     public function getState()
     {
         return $this->state;
     }
 
-    /**
-     * @param mixed $state
-     */
     public function setState($state)
     {
         $this->state = $state;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSeeking()
     {
         return $this->seeking;
     }
 
-    /**
-     * @param mixed $seeking
-     */
     public function setSeeking($seeking)
     {
         $this->seeking = $seeking;
     }
 
-    /**
-     * @return mixed
-     */
     public function getBio()
     {
         return $this->bio;
     }
 
-    /**
-     * @param mixed $bio
-     */
     public function setBio($bio)
     {
         $this->bio = $bio;

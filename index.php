@@ -66,6 +66,7 @@ $f3->route('GET|POST /info', function($f3){
             unset($_SESSION['page1']);
         }
 
+        //proceed to next page
         if($success) {
             $_SESSION['page1'] = 'success';
             $_SESSION['profile'] = $profile;
@@ -106,6 +107,9 @@ $f3->route('GET|POST /profile', function($f3) {
 
         //set fat free errors array
         $f3->set('errors', $errors);
+        if(sizeof($errors) != 0) {
+            unset($_SESSION['page2']);
+        }
 
         //move to next page if success
         if($success)
@@ -122,8 +126,11 @@ $f3->route('GET|POST /profile', function($f3) {
 });
 
 $f3->route('GET|POST /interests', function($f3){
-    if(get_class($_SESSION['profile']) == "Member") {
-        header("Location: http://gsingh.greenriverdev.com/328/dating/summary");
+    if(!isset($_SESSION['profile'])) {
+        $f3->reroute('/info?profile=none');
+    }
+    else if(get_class($_SESSION['profile']) == "Member") {
+        $f3->reroute('/summary');
     }
     if(isset($_POST['submit']))
     {
@@ -139,6 +146,10 @@ $f3->route('GET|POST /interests', function($f3){
         if(!isset($indoor) && !isset($outdoor)) {
             $f3->set('error', 'Please select at least one interest');
         } else { //store all selected interests in session if success
+            //get profile object from session
+            $profile = $_SESSION['profile'];
+            $profile->setIndoor($indoor);
+            $profile->setOutdoor($outdoor);
             if(!isset($outdoor))
                 $interests = $indoor;
             elseif (!isset($indoor))
@@ -147,6 +158,7 @@ $f3->route('GET|POST /interests', function($f3){
                 $interests = array_merge($indoor, $outdoor); //merge array
             $_SESSION['interests'] = $interests;
             $_SESSION['page3'] = 'success';
+            $_SESSION['profile'] = $profile;
             header("Location: http://gsingh.greenriverdev.com/328/dating/summary");
         }
 
@@ -161,7 +173,7 @@ $f3->route('GET|POST /summary', function(){
     //check all the pages are completed before proceeding to the summary page
     if(!isset($_SESSION['page1']) || !isset($_SESSION['page2']))
     {
-        header("Location: http://gsingh.greenriverdev.com/328/dating/interests?success=no");
+        header("Location: http://gsingh.greenriverdev.com/328/dating/info?success=no");
     }
     //display personal info page
     $template = new Template();

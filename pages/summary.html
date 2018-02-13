@@ -46,25 +46,25 @@
             <div class="col-md-6">
                 <table>
                     <tr>
-                        <td>Name: {{@$_SESSION['fname']}} {{@$_SESSION['lname']}}</td>
+                        <td>Name: {{@$_SESSION['profile']->getFname()}} {{@$_SESSION['profile']->getLname()}}</td>
                     </tr>
                     <tr>
-                        <td>Gender: {{@$_SESSION['gender']}}</td>
+                        <td>Gender: {{@$_SESSION['profile']->getGender()}}</td>
                     </tr>
                     <tr>
-                        <td>Age: {{@$_SESSION['age']}}</td>
+                        <td>Age: {{@$_SESSION['profile']->getAge()}}</td>
                     </tr>
                     <tr>
-                        <td>Phone: {{@$_SESSION['phone']}}</td>
+                        <td>Phone: {{@$_SESSION['profile']->getPhone()}}</td>
                     </tr>
                     <tr>
-                        <td>Email: {{@$_SESSION['email']}}</td>
+                        <td>Email: {{@$_SESSION['profile']->getEmail()}}</td>
                     </tr>
                     <tr>
-                        <td>State: {{@$_SESSION['state']}}</td>
+                        <td>State: {{@$_SESSION['profile']->getState()}}</td>
                     </tr>
                     <tr>
-                        <td>Seeking: {{@$_SESSION['seeking']}}</td>
+                        <td>Seeking: {{@$_SESSION['profile']->getSeeking()}}</td>
                     </tr>
                     <tr>
                         <td>Interests:
@@ -80,7 +80,7 @@
                 <img id="profile-img" src="http://suggestto.com/images/profile_pic/default.png" alt="img">
                 <div class="row">
                     <div class="col">
-                        <p>{{@$_SESSION['bio']}}</p>
+                        <p>{{@$_SESSION['profile']->getBio()}}</p>
                     </div>
                 </div>
             </div>
