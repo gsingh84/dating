@@ -24,7 +24,7 @@ $f3->set('DEBUG', 3);
 
 //Define a default route
 $f3->route('GET /', function() {
-    $_SESSION = array();
+    session_unset();
     $view = new View;
     echo $view->render('pages/home.html');
 });
@@ -69,7 +69,7 @@ $f3->route('GET|POST /info', function($f3){
         //proceed to next page
         if($success) {
             $_SESSION['page1'] = 'success';
-            $_SESSION['profile'] = $profile;
+            $_SESSION['profile'] = $profile; //passing profile object to session
             //redirect to next page
             header("Location: http://gsingh.greenriverdev.com/328/dating/profile");
         }
@@ -108,14 +108,15 @@ $f3->route('GET|POST /profile', function($f3) {
         //set fat free errors array
         $f3->set('errors', $errors);
         if(sizeof($errors) != 0) {
+            //unset page2 session variable if there is any error on page
             unset($_SESSION['page2']);
         }
 
         //move to next page if success
         if($success)
         {
-            $_SESSION['profile'] = $profile;
-            $_SESSION['page2'] = 'success';
+            $_SESSION['profile'] = $profile; //reassign object to session
+            $_SESSION['page2'] = 'success'; //set page2 session variable if there is not any error
             header("Location: http://gsingh.greenriverdev.com/328/dating/interests");
         }
     }
@@ -130,6 +131,7 @@ $f3->route('GET|POST /interests', function($f3){
         $f3->reroute('/info?profile=none');
     }
     else if(get_class($_SESSION['profile']) == "Member") {
+        //skip to summary page if nota prime member
         $f3->reroute('/summary');
     }
     if(isset($_POST['submit']))
@@ -148,8 +150,9 @@ $f3->route('GET|POST /interests', function($f3){
         } else { //store all selected interests in session if success
             //get profile object from session
             $profile = $_SESSION['profile'];
-            $profile->setIndoor($indoor);
-            $profile->setOutdoor($outdoor);
+            $profile->setIndoor($indoor); //set premium class indoor array values
+            $profile->setOutdoor($outdoor); //set premium class outdoor array values
+
             if(!isset($outdoor))
                 $interests = $indoor;
             elseif (!isset($indoor))
@@ -157,8 +160,7 @@ $f3->route('GET|POST /interests', function($f3){
             else
                 $interests = array_merge($indoor, $outdoor); //merge array
             $_SESSION['interests'] = $interests;
-            $_SESSION['page3'] = 'success';
-            $_SESSION['profile'] = $profile;
+            $_SESSION['profile'] = $profile; //reassign profile object back to session
             header("Location: http://gsingh.greenriverdev.com/328/dating/summary");
         }
 
@@ -169,11 +171,13 @@ $f3->route('GET|POST /interests', function($f3){
     echo $template->render('pages/interests.html');
 });
 
-$f3->route('GET|POST /summary', function(){
+$f3->route('GET|POST /summary', function($f3){
     //check all the pages are completed before proceeding to the summary page
-    if(!isset($_SESSION['page1']) || !isset($_SESSION['page2']))
+    if(!isset($_SESSION['page1']))
     {
-        header("Location: http://gsingh.greenriverdev.com/328/dating/info?success=no");
+        $f3->reroute('/info?success=no');
+    } else if(!isset($_SESSION['page2'])){
+        $f3->reroute('/profile?success=no');
     }
     //display personal info page
     $template = new Template();
