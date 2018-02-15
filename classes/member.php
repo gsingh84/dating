@@ -26,7 +26,7 @@ class Member
         $this->fname = $fname;
     }
 
-    public function setLanme($lname)
+    public function setLname($lname)
     {
         $this->lname = $lname;
     }
