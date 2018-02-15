@@ -44,6 +44,9 @@
         <form action="#" method="post">
             <div class="row">
                 <div class="col-12">
+                    <check if="{{isset($_GET['success'])}}">
+                        <p class="text-danger text-center">Please complete all the required fields before proceeding to next page</p>
+                    </check>
                     <p class="h2">Profile</p>
                 </div>
             </div>

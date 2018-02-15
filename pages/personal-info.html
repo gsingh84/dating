@@ -47,6 +47,9 @@
                     <check if="{{isset($_GET['profile'])}}">
                         <p class="text-danger text-center">Please fill the required fields before proceeding to next page</p>
                     </check>
+                    <check if="{{isset($_GET['success'])}}">
+                        <p class="text-danger text-center">Please complete all the required fields before proceeding to the summary page</p>
+                    </check>
                     <p class="h2">Personal Information</p>
                 </div>
             </div>

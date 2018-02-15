@@ -66,13 +66,21 @@
                     <tr>
                         <td>Seeking: {{@$_SESSION['profile']->getSeeking()}}</td>
                     </tr>
-                    <tr>
-                        <td>Interests:
-                            <repeat group="@$_SESSION['interests']" value="@interest">
-                                {{@interest}}
-                            </repeat>
-                        </td>
-                    </tr>
+
+                    <check if="get_class($_SESSION['profile']) == 'Premium'">
+                        <tr>
+                            <td>Interests:
+                                <repeat group="@$_SESSION['profile']->getIndoor()" value="@selectedIndoor">
+                                    {{@selectedIndoor}}
+                                </repeat> <!--indoor selection-->
+
+                                <repeat group="@$_SESSION['profile']->getOutdoor()" value="@selectedOutdoor">
+                                    {{@selectedOutdoor}}
+                                </repeat> <!--outdoor selection-->
+                            </td>
+                        </tr>
+                    </check> <!--show interests if premium member-->
+
                 </table>
             </div>
 

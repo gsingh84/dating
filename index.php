@@ -53,7 +53,7 @@ $f3->route('GET|POST /info', function($f3){
 
         //instantiate premium object if the premium member
         //checkbox is selected
-        if(isset($premium)) {
+        if (isset($premium)) {
             $profile = new Premium($firstName, $lastName, $age, $gender, $phone);
         } else {
             //instantiate member object
@@ -97,13 +97,15 @@ $f3->route('GET|POST /profile', function($f3) {
         $_SESSION['seeking'] = $seeking;
         $_SESSION['bio'] = $bio;
 
-        //get profile object from session
-        $profile = $_SESSION['profile'];
-        //add additional info into profile object
-        $profile->setEmail($email);
-        $profile->setState($state);
-        $profile->setSeeking($seeking);
-        $profile->setBio($bio);
+        if(isset($_SESSION['profile'])) {
+            //get profile object from session
+            $profile = $_SESSION['profile'];
+            //add additional info into profile object
+            $profile->setEmail($email);
+            $profile->setState($state);
+            $profile->setSeeking($seeking);
+            $profile->setBio($bio);
+        }
 
         //set fat free errors array
         $f3->set('errors', $errors);
@@ -175,8 +177,10 @@ $f3->route('GET|POST /summary', function($f3){
     //check all the pages are completed before proceeding to the summary page
     if(!isset($_SESSION['page1']))
     {
+        //reroute back to personal info page
         $f3->reroute('/info?success=no');
     } else if(!isset($_SESSION['page2'])){
+        //reroute back to profile page
         $f3->reroute('/profile?success=no');
     }
     //display personal info page
