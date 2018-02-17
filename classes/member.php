@@ -1,4 +1,7 @@
 <?php
+//Gursimran Singh
+//02/16/18
+//member.php
 
 class Member
 {
