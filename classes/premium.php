@@ -3,6 +3,15 @@
 //02/16/18
 //premium.php
 
+/**
+ * The Premium class represents a premium member account.
+ *
+ * The Premium class represents a premium object, that stores
+ * indoors and outdoors user interests. User can create
+ * premium account with this class.
+ * @author Gursimran Singh
+ * @copyright 2018
+ */
 class Premium extends Member
 {
     //fields

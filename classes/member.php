@@ -3,6 +3,15 @@
 //02/16/18
 //member.php
 
+/**
+ * The Member class represents a regular member account.
+ *
+ * The Member class represents a member with a name, age
+ * gender and phone. User can create regular account with
+ * this class.
+ * @author Gursimran Singh
+ * @copyright 2018
+ */
 class Member
 {
     //fields
