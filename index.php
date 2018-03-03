@@ -14,6 +14,7 @@ session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
+//Create an instance of database class
 $database = new Database();
 
 $f3->set('indoors', array('tv','movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing card', 'video games'));
@@ -25,7 +26,6 @@ $f3->set('DEBUG', 3);
 
 //Connect to the database
 $cnxn = $database->connect();
-//$cnxn = connect();
 
 //Define a default route
 $f3->route('GET /', function() {
@@ -46,7 +46,7 @@ $f3->route('GET|POST /info', function($f3){
         $phone = $_POST['phone'];
         $premium = $_POST['premium'];
         //include file
-        include('model/validate.php');
+        include_once('model/validate.php');
 
         //set user values in session
         $_SESSION['fname'] = $firstName;
@@ -95,7 +95,7 @@ $f3->route('GET|POST /profile', function($f3) {
         $bio = $_POST['bio'];
 
         //include file
-        include('model/validate-profile.php');
+        include_once('model/validate-profile.php');
         //set values in session
         $_SESSION['email'] = $email;
         $_SESSION['state'] = $state;
@@ -200,7 +200,7 @@ $f3->route('GET|POST /summary', function($f3){
 
 $f3->route('GET|POST /admin', function($f3){
     global $database;
-    $result = $database->allMembers();
+    $result = $database->allMembers(); //get all members details from database
 
     //add result into fat free array
     $f3->set('result', $result);
@@ -208,6 +208,22 @@ $f3->route('GET|POST /admin', function($f3){
     //display admin page
     $template = new Template();
     echo $template->render('pages/admin.html');
+});
+
+//define route for viewing member information
+$f3->route('GET /admin/@id', function($f3, $param){
+    //get member id
+    $id = $param['id'];
+    //get member details from database
+    global $database;
+    $details = $database->getDetails($id);
+
+    //passing detail to fat free variable
+    $f3->set('member', $details);
+
+    //display view profile page
+    $template = new Template();
+    echo $template->render('pages/view-profile.html');
 });
 
 //Run fat free
