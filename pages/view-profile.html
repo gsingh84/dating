@@ -41,7 +41,9 @@
             <p>State: {{@member['state']}}</p>
             <p>Seeking: {{@member['seeking']}}</p>
             <p>Bio: {{@member['bio']}}</p>
-            <p>Interests: {{@member['interests']}}</p>
+            <check if="{{@member['interests'] != null}}">
+                <p>Interests: {{@member['interests']}}</p>
+            </check>
         </div>
     </div>
 </body>
