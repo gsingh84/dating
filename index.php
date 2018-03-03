@@ -9,6 +9,8 @@ ini_set('display_errors', TRUE);
 
 //Require the autoload file
 require_once('vendor/autoload.php');
+require_once('/home/gsinghgr/config.php');
+require_once 'model/db_function.php';
 
 session_start();
 
@@ -21,6 +23,9 @@ $f3->set('states', array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California
 
 //Set debug level
 $f3->set('DEBUG', 3);
+
+//Connect to the database
+$cnxn = connect();
 
 //Define a default route
 $f3->route('GET /', function() {
@@ -183,6 +188,10 @@ $f3->route('GET|POST /summary', function($f3){
         //reroute back to profile page
         $f3->reroute('/profile?success=no');
     }
+
+    //save profile in database
+    add_Member($_SESSION['profile']);
+
     //display personal info page
     $template = new Template();
     echo $template->render('pages/summary.html');
