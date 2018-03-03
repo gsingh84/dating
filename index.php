@@ -10,12 +10,11 @@ ini_set('display_errors', TRUE);
 //Require the autoload file
 require_once('vendor/autoload.php');
 require_once('/home/gsinghgr/config.php');
-require_once 'model/db_function.php';
-
 session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
+$database = new Database();
 
 $f3->set('indoors', array('tv','movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing card', 'video games'));
 $f3->set('outdoors', array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing'));
@@ -25,7 +24,8 @@ $f3->set('states', array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California
 $f3->set('DEBUG', 3);
 
 //Connect to the database
-$cnxn = connect();
+$cnxn = $database->connect();
+//$cnxn = connect();
 
 //Define a default route
 $f3->route('GET /', function() {
@@ -190,11 +190,16 @@ $f3->route('GET|POST /summary', function($f3){
     }
 
     //save profile in database
-    add_Member($_SESSION['profile']);
+    global $database;
+    $database->add_Member($_SESSION['profile']);
 
     //display personal info page
     $template = new Template();
     echo $template->render('pages/summary.html');
+});
+
+$f3->route('GET|POST /admin', function($f3){
+
 });
 
 //Run fat free
