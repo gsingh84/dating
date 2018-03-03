@@ -199,7 +199,15 @@ $f3->route('GET|POST /summary', function($f3){
 });
 
 $f3->route('GET|POST /admin', function($f3){
+    global $database;
+    $result = $database->allMembers();
 
+    //add result into fat free array
+    $f3->set('result', $result);
+
+    //display admin page
+    $template = new Template();
+    echo $template->render('pages/admin.html');
 });
 
 //Run fat free

@@ -1,4 +1,21 @@
 <?php
+//--------Table Structure---------------
+//create table members (
+//    member_id int Not Null AUTO_INCREMENT,
+//    fname varchar(50),
+//    lname varchar(50),
+//    age int,
+//    gender varchar(10),
+//    phone varchar(10),
+//    email varchar(50),
+//    state varchar(25),
+//    seeking varchar(10),
+//    bio varchar(800),
+//    premium tinyint,
+//    image varchar(100),
+//    interests varchar(100),
+//    PRIMARY key (member_id)
+//);
 
 class Database
 {
@@ -19,6 +36,7 @@ class Database
     {
         global $cnxn;
 
+        //define a query
         $sql = "INSERT INTO members (fname, lname, age, gender, phone, email, state, seeking, bio, premium, interests) VALUES 
             (:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :interests)";
 
@@ -39,6 +57,7 @@ class Database
             }
         }
 
+        //bind parameters
         $statement->bindParam(':fname', $profile->getFname(), PDO::PARAM_STR);
         $statement->bindParam(':lname', $profile->getLname(), PDO::PARAM_STR);
         $statement->bindParam(':age', $profile->getAge(), PDO::PARAM_INT);
@@ -53,5 +72,25 @@ class Database
 
         //execute query
         $statement->execute();
+    }
+
+    function allMembers()
+    {
+        global $cnxn;
+
+        //define query
+        $sql = "SELECT * FROM members";
+
+        //prepare the statement
+        $statement = $cnxn->prepare($sql);
+
+        //execute the statement
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        //return the result
+        return $result;
     }
 }
